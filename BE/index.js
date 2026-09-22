@@ -55,14 +55,13 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`);
+});
+
 mongoose
     .connect(process.env.DB) 
-    .then(() => {
-        console.log('MongoDB-yə qoşuldu!');
-        app.listen(port, () => {
-            console.log(`Example app listening on port ${port}`);
-        });
-    })
+    .then(() => console.log('MongoDB-yə qoşuldu!'))
     .catch((err) => console.error('MongoDB-yə qoşularkən xəta!', err));
 
 
