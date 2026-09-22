@@ -37,6 +37,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+
 app.use(cookieParser());
 app.use(express.json());
 
@@ -55,9 +57,12 @@ app.get('/', (req, res) => {
 
 mongoose
     .connect(process.env.DB) 
-    .then(() => console.log('MongoDB-yə qoşuldu!'))
+    .then(() => 
+      console.log('MongoDB-yə qoşuldu!');
+      app.listen(port, () => {
+        console.log(`Example app listening on port ${port}`);
+  });
+})
     .catch((err) => console.error('MongoDB-yə qoşularkən xəta!', err));
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
-});
+
