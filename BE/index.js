@@ -11,7 +11,7 @@ import calendarRouter from './src/router/calendarRouter.js';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 
-dotenv.config({ path: '../.env' });
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -32,12 +32,12 @@ const corsOptions = {
     }
   },
   credentials: true,
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  allowedHeaders: 'Content-Type,Authorization'
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+app.options('(.*)', cors(corsOptions));
 
 app.use(cookieParser());
 app.use(express.json());
